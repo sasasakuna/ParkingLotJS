@@ -1,4 +1,3 @@
-
 function Car(){};
 function Ticket(){};
 
@@ -132,25 +131,49 @@ function ParkingBoy(parkingLotArray){
 
 }
 
-function parkingBoyTest(){
-	var parkingLotArrayTest = new Array();
-	parkingLotArrayTest.push(new ParkingLot(1));
-	parkingLotArrayTest.push(new ParkingLot(1));
-    var parkingBoy = new ParkingBoy(parkingLotArrayTest);
-    try {
-    	var car = new Car();
-    	var ticket = parkingBoy.park(car);
-		var another = parkingBoy.getCar(ticket);
-		if(car === another){
-			console.log("SUCCESS");
-		}
-		else {
-			console.log("Failure");
-		}
-    }
-    catch(err){
-    	console.log("err");
-    }
+// function parkingBoyTest(){
+// 	var parkingLotArrayTest = new Array();
+// 	parkingLotArrayTest.push(new ParkingLot(1));
+// 	parkingLotArrayTest.push(new ParkingLot(1));
+//     var parkingBoy = new ParkingBoy(parkingLotArrayTest);
+//     try {
+//     	var car = new Car();
+//     	var ticket = parkingBoy.park(car);
+// 		var another = parkingBoy.getCar(ticket);
+// 		if(car === another){
+// 			console.log("SUCCESS");
+// 		}
+// 		else {
+// 			console.log("Failure");
+// 		}
+//     }
+//     catch(err){
+//     	console.log("err");
+//     }
+
+// }
+// parkingBoyTest();
+
+function SmartParkingBoy(parkingLotArray){
+   this.parkingLotArray = parkingLotArray;
+}
+SmartParkingBoy.prototype = new ParkingBoy(this.parkingLotArray);
+SmartParkingBoy.prototype.chooseParkingLot = function(){
+	var temp = SmartParkingBoy.prototype.parkingLotArray;
+	temp.sort(compare);
+    var maxParkingLot = temp[0];
+    console.log(maxParkingLot.availableLot);
+
+};
+function compare(value1,value2){
+	return value1 - value2;
 
 }
-parkingBoyTest();
+function SmartParkingBoyTest(){
+  	var parkingLotArrayTest = new Array();
+	parkingLotArrayTest.push(new ParkingLot(1));
+	parkingLotArrayTest.push(new ParkingLot(3));
+	parkingLotArrayTest.push(new ParkingLot(2));
+
+	var spb = new SmartParkingBoy(parkingLotArrayTest);
+}
